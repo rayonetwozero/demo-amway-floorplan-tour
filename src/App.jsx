@@ -27,8 +27,8 @@ export default function App() {
         camera={{
           position: isMobile ? [1.2, 18, 6] : [1.2, 12, 3],
           fov: isMobile ? 65 : 50,
-          near: 0.1,
-          far: 100,
+          near: 1,
+          far: 50,
         }}
         gl={{ antialias: true, alpha: true }}
         shadows
@@ -36,14 +36,8 @@ export default function App() {
       >
         <Suspense fallback={null}>
           {/* Lighting */}
-          <ambientLight intensity={1.2} />
-          <directionalLight
-            position={[8, 16, 8]}
-            intensity={1.5}
-            castShadow
-            shadow-mapSize={[1024, 1024]}
-          />
-          <directionalLight position={[-8, 10, -8]} intensity={0.4} />
+          <ambientLight intensity={6} />
+          <directionalLight position={[-8, 10, -8]} intensity={5} />
 
           {/* Model */}
           <FloorPlan />
@@ -57,10 +51,11 @@ export default function App() {
 
           {/* Camera controls */}
           <OrbitControls
+            enablePan={false}
             enableDamping
             dampingFactor={0.07}
-            minDistance={3}
-            maxDistance={22}
+            minDistance={8}
+            maxDistance={13}
             minPolarAngle={0}
             maxPolarAngle={Math.PI / 2.1}
             target={[1.2, 0, -0.5]}
@@ -74,6 +69,7 @@ export default function App() {
       <div className="page-title">新竹安麗空間</div>
 
       <div className="controls-hint">
+        
         <span className="desktop-only"><strong>拖曳</strong> 旋轉</span>
         <span className="desktop-only"><strong>滾輪</strong> 縮放</span>
         <span className="mobile-only"><strong>單指</strong> 旋轉</span>
